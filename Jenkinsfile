@@ -1,10 +1,10 @@
 pipeline {
-    agent { label 'vk-agent' }
+    agent { label 'vk-node' }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/<your-username>/java-jenkins-demo.git', branch: 'main'
+                git url: 'https://github.com/vishnuadur/java_mavenproject.git', branch: 'main'
             }
         }
 
