@@ -9,11 +9,11 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                // Skip tests to avoid JUnit errors
-                sh 'mvn -B clean package -DskipTests'
-            }
-        }
+	    steps {
+        	sh 'mvn -B clean package -Dmaven.test.skip=true'
+    		}
+	}
+
 
         stage('Archive') {
             steps {
