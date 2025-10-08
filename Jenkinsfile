@@ -21,5 +21,13 @@ pipeline {
                 archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
             }
         }
+
+		stage('Sonarqube Analysis') {
+			steps {
+				withSonarqubeEnv('Sonarqube') {
+					sh 'sonar-scanner'
+				}
+			}
+		}
     }
 }
