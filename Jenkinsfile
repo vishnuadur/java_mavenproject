@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/vishnuadur/java_mavenproject.git', credentialsId: '93b94bea-507f-404e-9d4c-9ed8ef531cb1'
+                git branch: 'main', 
+                    url: 'https://github.com/vishnuadur/java_mavenproject.git', 
+                    credentialsId: '93b94bea-507f-404e-9d4c-9ed8ef531cb1'
             }
         }
 
@@ -16,7 +18,8 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('MySonarQubeServer') {
+                // Replace 'YourSonarQubeName' with your actual SonarQube server name
+                withSonarQubeEnv('YourSonarQubeName') {
                     sh 'mvn sonar:sonar -Dsonar.projectKey=demo1'
                 }
             }
@@ -25,6 +28,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
+                    // Fails the pipeline if Quality Gate fails
                     waitForQualityGate abortPipeline: true
                 }
             }
